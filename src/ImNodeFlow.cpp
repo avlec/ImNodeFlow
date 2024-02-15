@@ -245,6 +245,15 @@ namespace ImFlow
         m_links.push_back(link);
     }
 
+    void ImNodeFlow::removeNode(const std::string& name)
+    {
+        const auto it = std::find_if(std::begin(m_nodes), std::end(m_nodes), [&name](const std::shared_ptr<BaseNode>& shptr){
+            return shptr.get()->name() == name;
+        });
+        if (it != std::end(m_nodes))
+            m_nodes.erase(it);
+    }
+
     void ImNodeFlow::update()
     {
         // Updating looping stuff

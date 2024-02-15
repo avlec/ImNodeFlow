@@ -54,6 +54,17 @@ namespace ImFlow
         return addNode<T>(name, screen2content(pos), std::forward<Params>(args)...);
     }
 
+    template <typename T>
+    void ImNodeFlow::removeNode(T *const pNode)
+    {
+        static_assert(std::is_base_of<BaseNode, T>::value, "Popped type is not a subclass of BaseNode!");
+        const auto it = std::find_if(std::begin(m_nodes), std::end(m_nodes), [pNode](const std::shared_ptr<BaseNode>& shptr){
+            return shptr.get() == pNode;
+        });
+        if (it != std::end(m_nodes))
+            m_nodes.erase(it);
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
     // BASE NODE
 

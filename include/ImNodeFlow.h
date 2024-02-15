@@ -294,6 +294,23 @@ namespace ImFlow
         T* placeNodeAt(const std::string& name, const ImVec2& pos, Params&&... args);
 
         /**
+         * @brief Removes a node from the editor
+         * @node If the node is not found nothing is done
+         * @tparam T Derived class of <BaseNode> being removed
+         * @param node The BaseNode to remove.
+         * */
+        template <typename T>
+        void removeNode(T *const node);
+
+        /**
+         * @brief Removes a node from the editor
+         * @node If the node is not found nothing is done
+         * @param name Name of the node to be removed
+         * */
+        void removeNode(const std::string& name);
+
+
+        /**
          * @brief Add link to the handler internal list
          * @param link Reference to the link
          */
@@ -480,6 +497,7 @@ namespace ImFlow
          * @param inf Pointer to the Grid Handler the node is in
          */
         explicit BaseNode(std::string name, ImVec2 pos, ImNodeFlow* inf);
+        virtual ~BaseNode() = default;
 
         /**
          * @brief Main loop of the node
